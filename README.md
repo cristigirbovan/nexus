@@ -9,10 +9,10 @@
 </p>
 
 <p align="center">
-  <a href="#quick-start">Quick Start</a> &bull;
   <a href="#how-it-works">How It Works</a> &bull;
   <a href="#detection-engines">Detection Engines</a> &bull;
   <a href="#dashboard">Dashboard</a> &bull;
+  <a href="#roadmap">Roadmap</a>
 </p>
 
 ---
@@ -137,6 +137,26 @@ The NEXUS dashboard provides real-time visibility into all agent activity:
 | **Investigating** | Active investigation with notes |
 | **Resolved** | Issue addressed with resolution notes |
 | **False Positive** | Marked as non-threat |
+
+---
+
+## Roadmap
+
+Ideas and improvements we're exploring:
+
+### A2A (Agent-to-Agent) Protocol Support
+Google's [Agent-to-Agent protocol](https://github.com/google/A2A) enables agents to communicate with each other. As multi-agent systems become common, NEXUS should sit at the A2A boundary too -- inspecting agent-to-agent messages for injection, data leakage, and unauthorized delegation. The same detection engines that scan tool calls can scan inter-agent communication.
+
+### NEXUS as an MCP Server
+Today NEXUS is a transparent MCP proxy -- agents talk to it like a tool server. The next step is exposing NEXUS's own capabilities as MCP tools: `nexus_get_alerts`, `nexus_check_policy`, `nexus_audit_query`. This lets agents directly query their own security posture, check if an action would be blocked before attempting it, or retrieve audit history -- turning the firewall into a security tool that agents can reason about.
+
+### Additional Directions
+- **MCP transport support** -- stdio and SSE transports (currently HTTP only)
+- **Streaming response scanning** -- analyze SSE/streaming tool responses in real-time as chunks arrive
+- **Behavioral anomaly detection** -- ML-based baseline profiling to detect unusual agent patterns beyond regex matching
+- **Multi-tenant isolation** -- per-team or per-agent policy namespaces with separate audit trails
+- **OWASP Top 10 for LLM Applications** -- align detection engines with the [OWASP LLM Top 10](https://owasp.org/www-project-top-10-for-large-language-model-applications/) categories
+- **Plugin architecture** -- custom detection engines and policy rules as pluggable modules
 
 ---
 
